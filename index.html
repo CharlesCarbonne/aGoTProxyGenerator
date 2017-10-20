@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>JavaScript - read JSON from URL</title>
+  <script src="js/jquery-3.2.1.min.js"></script>
+</head>
+
+<body>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <h1 text-center>A Game of Thrones Proxy Generator</h1>
+      <p>
+        Saisissez votre liste de cartes à imprimer dans le formulaire suivant et cliquez sur go
+      </p>
+    </div>
+  </div>
+
+
+
+  <script>
+
+  $(document).ready(function() {
+    $("#Go").click(function getCard() {
+      $.getJSON('https://thronesdb.com/api/public/cards/', function(gotResults) {
+        var lines = $('textarea').val().split('\n');
+        for (var j = 0; j < lines.length; j++) {
+          var cardLabel = lines[j];
+          for (var i = 0; i < gotResults.length; i++) {
+            if (gotResults[i].label === cardLabel) {
+              $("#banner-section").html($("#banner-section").html() + "<img src=https://thronesdb.com" + gotResults[i].imagesrc + "></img>");
+            } else if (gotResults[i].name === cardLabel) {
+              $("#cardName").html(lines[j] + " ");
+              $("#labelResults").html($("#labelResults").html() + gotResults[i].label + "<br/>");
+              }
+            }
+          }
+      });
+    });
+  });
+
+  </script>
+
+  <!--
+Ptite sauvegarde du script:
+
+<script>
+$(document).ready(function() {
+  $("#Go").click(function getCard() {
+    $.getJSON('https://thronesdb.com/api/public/cards/', function(gotResults) {
+      var lines = $('textarea').val().split('\n');
+      for (var j = 0; j < lines.length; j++) {
+        var cardLabel = lines[j];
+        for (var i = 0; i < gotResults.length; i++) {
+          if (gotResults[i].label === cardLabel) {
+            $("#banner-section").html($("#banner-section").html() + "<img src=https://thronesdb.com" + gotResults[i].imagesrc + "></img>");
+          } else if (gotResults[i].name === cardLabel) {
+            $("#cardName").html(lines[j] + " ");
+            $("#labelResults").html($("#labelResults").html() + gotResults[i].label + "<br/>");
+            }
+          }
+        }
+    });
+  });
+});
+</script>
+
+
+
+
+
+
+
+https://thronesdb.com/api/public/cards/?jsonp=parseCards
+Voir parseset sur l'api thronesdb...
+
+
+  Si gotResults[i].label est nul.
+  Faire une boucle qui parcourt le tableau, Si un nom est présent plus d'une fois,
+  Reparcourir le tableau en relevant les pack_name et les labels,
+  Retourner un affichage pour l'utilisateur, avec un choix entre les cartes des différents pack_name,
+  puis inscrire le label choisi dans le script getCard.-->
+
+  <form id="myForm" action="/action_page.php">
+  </form>
+  <textarea rows="4" cols="50" name="comment" form="myForm"></textarea>
+
+  <button id="Go">get card Img</button>
+
+  <div class="row" id="banner-section">
+
+  </div>
+
+  <p>
+    Voila les différents labels dispo pour la carte <span id="cardName"></span>:
+  </p>
+  <p id="labelResults"></p>
+
+</body>
+
+</html>
