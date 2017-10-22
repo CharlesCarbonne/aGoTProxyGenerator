@@ -5,8 +5,15 @@
 
 .thronesfont {
   font-family: 'thronesdb';
-  padding: 10px 21px 10px 21px;
+  padding: 50px 12.5% 50px 12.5%;
+}
 
+.row{
+  padding : 5%;
+}
+
+.container-fluid{
+  background-color: #ECF0F1;
 }
 
 @media print {
@@ -55,8 +62,6 @@
 #stuff-bottom {
   margin-top: 20px;
 }
-
-
 
 .scan {
   height: 319px;
