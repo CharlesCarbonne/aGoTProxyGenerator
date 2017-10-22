@@ -1,0 +1,47 @@
+@media print {
+  #content {
+    padding: 0
+  }
+  #header {
+    display: none
+  }
+  #stuff-top {
+    display: none
+  }
+  #stuff-bottom {
+    display: none
+  }
+  .cardswitch {
+    display: none
+  }
+  script {
+    display: none;
+  }
+  .scan {
+    page-break-inside: avoid;
+    -webkit-region-break-inside: avoid;
+    position: relative;
+    page-break-before: auto;
+    page-break-after: auto;
+    display: block;
+  }
+#img-section {
+    page-break-inside: avoid;
+    -webkit-region-break-inside: avoid;
+    position: relative;
+    page-break-before: auto;
+    page-break-after: auto;
+    display: block;
+  }
+}
+
+#img-section {
+  width: 672px;
+}
+
+.scan {
+  height: 319px;
+  width: 224px;
+  float: left;
+  display: block;
+}
