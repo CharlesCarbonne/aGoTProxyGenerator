@@ -5,7 +5,8 @@
 
 .thronesfont {
   font-family: 'thronesdb';
-  padding: 50px 12.5% 50px 12.5%;
+  padding: 5% 12.5% 5% 12.5%;
+  height: 273.52px;
 }
 
 .row{
@@ -83,7 +84,7 @@
   font-family: 'thronesdb';
   speak: none;
   font-style: normal;
-  font-size: 30px;
+  font-size: 40px;
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
@@ -207,4 +208,12 @@
 
 .icon-thenightswatch{
   background-color: #7A7A7A;
+}
+
+.houseName{
+  font-size: 25px;
+}
+
+.nightsWatchName{
+  font-size: 23px;
 }
