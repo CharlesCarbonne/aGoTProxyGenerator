@@ -18,13 +18,45 @@
         <div class="col-sm-12 text-center">
           <h1>A Game of Thrones Proxy Generator</h1>
           <div class="iconsbanner">
-            <span class="icon icon-baratheon thronesfont" id="hexagon"></span><span class="icon icon-greyjoy thronesfont" id="hexagon"></span><span class="icon icon-lannister thronesfont" id="hexagon"></span><span class="icon icon-thenightswatch thronesfont" id="hexagon"></span><span class="icon icon-martell thronesfont" id="hexagon"></span><span class="icon icon-stark thronesfont" id="hexagon"></span><span class="icon icon-tyrell thronesfont" id="hexagon"></span><span class="icon icon-targaryen thronesfont" id="hexagon"></span><br></div>
-            <p>
+            <span class="icon icon-baratheon thronesfont" id="hexagon"></span><span class="icon icon-greyjoy thronesfont" id="hexagon"></span><span class="icon icon-thenightswatch thronesfont" id="hexagon"></span><span class="icon icon-lannister thronesfont"
+              id="hexagon"></span><span class="icon icon-martell thronesfont" id="hexagon"></span><span class="icon icon-tyrell thronesfont" id="hexagon"></span><span class="icon icon-stark thronesfont" id="hexagon"></span><span class="icon icon-targaryen thronesfont"
+              id="hexagon"></span><br></div>
+          <p>
             Saisissez votre liste de cartes à imprimer dans le formulaire suivant et cliquez sur go
           </p>
         </div>
       </div>
   </header>
+
+  <div class="container-fluid text-center" id="stuff-top">
+    <div class="row">
+      <div class="col-sm-6">
+        <form id="myForm" action="/action_page.php">
+        </form>
+        <textarea rows="4" cols="50" name="comment" form="myForm"></textarea>
+
+        <button id="Go">GO</button>
+      </div>
+
+
+      <div class="col-sm-6">
+        <table id="tablelabel">
+          <tr>Voila les différents labels dispo pour la carte:</tr>
+        </table>
+        <p> <span id="cardName"></span>:</p>
+        <p id="labelResults"></p>
+      </div>
+    </div>
+
+    <div class="row center-block img-responsive" id="img-section">
+
+    </div>
+  </div>
+
+
+
+
+  </div>
 
   <script>
     $(document).ready(function() {
@@ -34,18 +66,24 @@
           for (var j = 0; j < lines.length; j++) {
             var x = lines[j].split(' ')[0];
             var cardLabel = lines[j].split(' ').splice(1).join(' ');
-          //  var cardLabel = lines[j].substring(2);
+            //  var cardLabel = lines[j].substring(2);
             //var x = lines[j].split(0);
             console.log(cardLabel)
             console.log(x);
-            for (var n = 0; n < x; n++) {
-              for (var i = 0; i < gotResults.length; i++) {
-                if (gotResults[i].label === cardLabel) {
+            for (var n = 0; n < x; n++) { //Pour chaque ligne
+              for (var i = 0; i < gotResults.length; i++) { //Pour chaque objet du json
+                if (gotResults[i].label === cardLabel) { //Si label objet === nom tapé
                   $("#img-section").html($("#img-section").html() + '<img src=https://thronesdb.com' + gotResults[i].imagesrc + ' class= "scan"></img>');
                 } else if (gotResults[i].name === cardLabel) {
-                  $("#cardName").html(lines[j] + " ");
+
+
+                  $("#tablelabel").html($("#tablelabel").html() + '<tr><td id="cardName"></td><td id="labelResults"></td>');
+
+                    $("#cardName").html(cardLabel);
+
                   $("#labelResults").html($("#labelResults").html() + gotResults[i].label + "<br/>");
                 }
+
               }
             }
           }
@@ -54,77 +92,123 @@
     });
   </script>
 
+
   <!--
 
-Pour split les lignes:
-strA = str.split(' ')[0];                    // "72";
-strB = str.split(' ').splice(1).join(' ');
+
+  
+  Ecrire une fonction pour faire un tableau contenant <table><tr><td>Nom</td><td>Label <br>Label...<br></td></tr></table>
 
 
-Ptite sauvegarde du script:
-
-<script>
-$(document).ready(function() {
-  $("#Go").click(function getCard() {
-    $.getJSON('https://thronesdb.com/api/public/cards/', function(gotResults) {
-      var lines = $('textarea').val().split('\n');
-      for (var j = 0; j < lines.length; j++) {
-        var cardLabel = lines[j];
-        for (var i = 0; i < gotResults.length; i++) {
-          if (gotResults[i].label === cardLabel) {
-            $("#banner-section").html($("#banner-section").html() + "<img src=https://thronesdb.com" + gotResults[i].imagesrc + "></img>");
-          } else if (gotResults[i].name === cardLabel) {
-            $("#cardName").html(lines[j] + " ");
-            $("#labelResults").html($("#labelResults").html() + gotResults[i].label + "<br/>");
-            }
-          }
-        }
-    });
-  });
-});
-</script>
-
-
-
-
-
-
-
-https://thronesdb.com/api/public/cards/?jsonp=parseCards
-Voir parseset sur l'api thronesdb...
-
-
-  Si gotResults[i].label est nul.
-  Faire une boucle qui parcourt le tableau, Si un nom est présent plus d'une fois,
-  Reparcourir le tableau en relevant les pack_name et les labels,
-  Retourner un affichage pour l'utilisateur, avec un choix entre les cartes des différents pack_name,
-  puis inscrire le label choisi dans le script getCard.-->
-  <div class="container-fluid text-center" id="stuff-top">
-    <div class="row">
-      <div class="col-sm-12">
-        <form id="myForm" action="/action_page.php">
-        </form>
-        <textarea rows="4" cols="50" name="comment" form="myForm"></textarea>
-      </div>
-      <button id="Go">get card Img</button>
-
-
-
-      <p>
-        Voila les différents labels dispo pour la carte <span id="cardName"></span>:
-      </p>
-      <p id="labelResults"></p>
-    </div>
-  </div>
-
-  <div class="row center-block img-responsive" id="img-section">
-
-  </div>
-
+  Idées de scripts pour générer le tableau des exceptions labels
   <div class="container-fluid text-center" id="stuff-bottom">
 
-  <input class="bigbutton printit" type="button" value="Print" onclick="window.print()" />
-</div>
+    <input class="bigbutton printit" type="button" value="Print" onclick="window.print()" />
+
+
+
+    <input type="button" value="Generate Table" onclick="GenerateTable()" />
+    <hr />
+    <div id="dvTable">
+    </div>
+    <script type="text/javascript">
+    function GenerateTable() {
+        //Build an array containing Customer records.
+        var customers = new Array();
+        customers.push(["Customer Id", "Name", "Country"]);
+        customers.push([1, "John Hammond", "United States"]);
+        customers.push([2, "Mudassar Khan", "India"]);
+        customers.push([3, "Suzanne Mathews", "France"]);
+        customers.push([4, "Robert Schidner", "Russia"]);
+
+        //Create a HTML Table element.
+        var table = document.createElement("TABLE");
+        table.border = "1";
+
+        //Get the count of columns.
+        var columnCount = customers[0].length;
+
+        //Add the header row.
+        var row = table.insertRow(-1);
+        for (var i = 0; i < columnCount; i++) {
+            var headerCell = document.createElement("TH");
+            headerCell.innerHTML = customers[0][i];
+            row.appendChild(headerCell);
+        }
+
+        //Add the data rows.
+        for (var i = 1; i < customers.length; i++) {
+            row = table.insertRow(-1);
+            for (var j = 0; j < columnCount; j++) {
+                var cell = row.insertCell(-1);
+                cell.innerHTML = customers[i][j];
+            }
+        }
+
+        var dvTable = document.getElementById("dvTable");
+        dvTable.innerHTML = "";
+        dvTable.appendChild(table);
+    }
+
+    function addRow() {
+
+        var myName = document.getElementById("name");
+        var age = document.getElementById("age");
+        var table = document.getElementById("myTableData");
+
+        var rowCount = table.rows.length;
+        var row = table.insertRow(rowCount);
+
+        row.insertCell(0).innerHTML= '<input type="button" value = "Delete" onClick="Javacsript:deleteRow(this)">';
+        row.insertCell(1).innerHTML= myName.value;
+        row.insertCell(2).innerHTML= age.value;
+
+    }
+
+    function deleteRow(obj) {
+
+        var index = obj.parentNode.parentNode.rowIndex;
+        var table = document.getElementById("myTableData");
+        table.deleteRow(index);
+
+    }
+
+    function addTable() {
+
+        var myTableDiv = document.getElementById("myDynamicTable");
+
+        var table = document.createElement('TABLE');
+        table.border='1';
+
+        var tableBody = document.createElement('TBODY');
+        table.appendChild(tableBody);
+
+        for (var i=0; i<3; i++){
+           var tr = document.createElement('TR');
+           tableBody.appendChild(tr);
+
+           for (var j=0; j<4; j++){
+               var td = document.createElement('TD');
+               td.width='75';
+               td.appendChild(document.createTextNode("Cell " + i + "," + j));
+               tr.appendChild(td);
+           }
+        }
+        myTableDiv.appendChild(table);
+
+    }
+
+    function load() {
+
+        console.log("Page load finished");
+
+    }
+
+
+
+
+    </script>-->
+
 </body>
 
 </html>

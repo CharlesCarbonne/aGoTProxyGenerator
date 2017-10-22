@@ -5,7 +5,8 @@
 
 .thronesfont {
   font-family: 'thronesdb';
-  padding: 10px;
+  padding: 10px 21px 10px 21px;
+
 }
 
 @media print {
@@ -19,6 +20,7 @@
     display: none
   }
   #stuff-bottom {
+    margin-top: 20px;
     display: none
   }
   .cardswitch {
@@ -47,7 +49,14 @@
 
 #img-section {
   width: 672px;
+  margin-top: 20px
 }
+
+#stuff-bottom {
+  margin-top: 20px;
+}
+
+
 
 .scan {
   height: 319px;
@@ -161,8 +170,36 @@
 
 .icon-tyrell{
   background-color: #509F16;
+  color : white;
 }
 
 .icon-baratheon{
   background-color: #E3D852;
+}
+
+.icon-greyjoy{
+  background-color: #1D7A99;
+  color : white
+}
+
+.icon-targaryen{
+  background-color: #1C1C1C;
+  color : white;
+}
+
+.icon-lannister{
+  background-color: #C00106;
+  color: white;
+}
+
+.icon-martell{
+  background-color: #E89521;
+}
+
+.icon-stark{
+  background-color: #CFCFCF;
+}
+
+.icon-thenightswatch{
+  background-color: #7A7A7A;
 }
