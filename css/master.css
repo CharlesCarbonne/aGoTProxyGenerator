@@ -9,15 +9,12 @@
   height: 273.52px;
 }
 
-.row{
-  padding : 5%;
-}
-
 .container-fluid{
   background-color: #ECF0F1;
 }
 
 @media print {
+
   #content {
     padding: 0
   }
@@ -28,10 +25,6 @@
     display: none
   }
   #stuff-bottom {
-    margin-top: 20px;
-    display: none
-  }
-  .cardswitch {
     display: none
   }
   script {
@@ -52,12 +45,12 @@
     page-break-before: auto;
     page-break-after: auto;
     display: block;
+    margin-top: 0;
   }
 }
 
 #img-section {
   width: 672px;
-  margin-top: 20px
 }
 
 #stuff-bottom {
@@ -216,4 +209,8 @@
 
 .nightsWatchName{
   font-size: 23px;
+}
+
+.toprow{
+  margin: 0 0 10px 0;
 }
