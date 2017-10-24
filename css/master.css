@@ -214,3 +214,14 @@
 .toprow{
   margin: 0 0 10px 0;
 }
+
+.plot {
+    height: 224px;
+    width: 319px;
+    display: block;
+    float: left;
+}
+
+#plot-section {
+  width: 957;
+}

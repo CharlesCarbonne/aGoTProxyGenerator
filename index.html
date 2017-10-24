@@ -22,44 +22,46 @@
         <!--<span class="col-sm-offset-2 col-sm-1 icon icon-baratheon thronesfont"><p class="houseName">House Baratheon</p></span><span class="col-sm-1  icon icon-greyjoy thronesfont"><p class="houseName">House Greyjoy</p></span><span class="col-sm-1  icon icon-thenightswatch thronesfont"><p class="nightsWatchName">The Night's Watch</p></span><span class="col-sm-1  icon icon-lannister thronesfont"
              ><p class="houseName">House Lannister</p></span><span class="col-sm-1  icon icon-martell thronesfont"><p class="houseName">House Martell</p></span><span class="col-sm-1  icon icon-tyrell thronesfont"><p class="houseName">House<br>Tyrell</p></span><span class="col-sm-1  icon icon-stark thronesfont"><p class="houseName">House<br>Stark</p></span><span class="col-sm-1  icon icon-targaryen thronesfont"
              ><p class="houseName">House Targaryen</p></span><br>-->
-        <div class="col-sm-12">
-          <p>
-            Saisissez votre liste de cartes à imprimer dans le formulaire suivant et cliquez sur go
-          </p>
-        </div>
       </div>
     </div>
   </header>
 
   <div class="container-fluid text-center" id="stuff-top">
     <div class="row class toprow">
-      <div class="col-sm-6">
+      <div class="col-sm-5">
+        <br /><p>
+          Tapez votre decklist dans ce formulaire:
+        </p>
         <form id="myForm" action="/action_page.php">
         </form>
         <textarea rows="4" cols="50" name="comment" form="myForm"></textarea>
-        <br /><button id="Go">GO</button>
+        <br /><button id="GetCards">GO</button>
+
+      </div>
+
+      <div class="col-sm-2">
         <br /><button id="resetProxy">Reset les proxy (images)</button>
-
+        <br /><button onclick="printProxys()">Imprimer les Proxys</button>
       </div>
 
-
-
-      <div class="col-sm-6">
-        <table id="tablelabel">
-          <tr>Voila les différents labels dispo pour la carte:</tr>
-        </table>
-        <p> <span id="cardName"></span></p>
-        <p id="labelResults"></p>
+      <div class="col-sm-5">
+        <br /><p>
+          Tapez votre liste de complots dans ce formulaire:
+        </p>
+        <form id="myForm" action="/action_page.php">
+        </form>
+        <textarea rows="4" cols="50" name="comment" form="myForm" id="plotarea"></textarea>
+        <br /><button id="GetPlots">GO</button>
       </div>
-      <div class="col-sm-12">
-        <button onclick="printProxys()">Imprimer les Proxys</button>
-      </div>
+
     </div>
   </div>
 
-  <div class="row center-block img-responsive" id="img-section">
-
+  <div>
+    <div class="center-block img-responsive" id="img-section"></div>
+    <div class="center-block img-responsive" id="plot-section"></div>
   </div>
+
 
 
 
@@ -69,6 +71,32 @@
 
   <!--
 
+  $(document).ready(function() {
+    $("#Go").click(function displayProxy() {
+      $.getJSON('https://thronesdb.com/api/public/cards/', function(gotResults) {
+        var lines = $('textarea').val().split('\n');
+        for (var j = 0; j < lines.length; j++) {
+          var z = lines[j].split(' ')[0];
+          var x = z.slice(0, -1);
+          var cardLabel = lines[j].split(' ').splice(1).join(' ');
+          //  var cardLabel = lines[j].substring(2);
+          //var x = lines[j].split(0);
+          console.log(cardLabel)
+          console.log(x);
+          for (var n = 0; n < x; n++) { //Pour chaque ligne
+            for (var i = 0; i < gotResults.length; i++) { //Pour chaque objet du json
+              if (gotResults[i].label === cardLabel) { //Si label objet === nom tapé
+                $("#img-section").html($("#img-section").html() + '<img src=https://thronesdb.com' + gotResults[i].imagesrc + ' class= "scan"></img>');
+              } else if (gotResults[i].name === cardLabel) {
+                $("#tablelabel").html($("#tablelabel").html() + '<tr><td id="cardName"></td><td id="labelResults"></td>');
+                $("#cardName").html(cardLabel);
+                $("#labelResults").html($("#labelResults").html() + gotResults[i].label + "<br/>");
+              }
+            }
+          }
+        }
+      });
+    });
 
 
   Ecrire une fonction pour faire un tableau contenant <table><tr><td>Nom</td><td>Label <br>Label...<br></td></tr></table>
