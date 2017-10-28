@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(function() {
   $("#GetCards").click(function displayProxy() {
     $.getJSON('https://thronesdb.com/api/public/cards/', function(gotResults) {
       var lines = $('textarea').val().split('\n');
@@ -11,11 +11,6 @@ $(document).ready(function() {
         var cardExtension = regExp.exec(cardLabel)[1];
         var lastIndex = cardLabel.lastIndexOf(" (");
         var cardName = cardLabel.substring(0, lastIndex);
-
-
-
-
-
         //  var cardLabel = lines[j].substring(2);
         //var x = lines[j].split(0);
         console.log("label complet: " + cardLabel)
@@ -49,11 +44,6 @@ $(document).ready(function() {
         var cardExtension = regExp.exec(cardLabel)[1];
         var lastIndex = cardLabel.lastIndexOf(" (");
         var cardName = cardLabel.substring(0, lastIndex);
-
-
-
-
-
         //  var cardLabel = lines[j].substring(2);
         //var x = lines[j].split(0);
         console.log("label complet: " + cardLabel)
